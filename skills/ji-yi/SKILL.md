@@ -14,6 +14,8 @@ If the user only selects the plugin, says `@memory`, or says `@记忆`, immediat
 3. Ask the user to choose `1` current project, `2` global, `3` both, or `4` do not write.
 4. Write only after the user chooses `1`, `2`, or `3`.
 
+Chinese wording rule: always write `全局记忆`. Never write `全球记忆`.
+
 Use ordinary file editing tools after confirmation. If no file editing tools are available, provide target paths and copy-ready Markdown.
 
 Keep responses compact. Do not include diagnostics or implementation details unless the user asks.
