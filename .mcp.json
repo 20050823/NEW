@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "memory": {
+      "title": "记忆",
+      "description": "File-based memory tools for reviewing context and writing AGENTS.md / CLAUDE.md.",
+      "cwd": ".",
+      "command": "node",
+      "args": [
+        "./mcp/server.cjs",
+        "--stdio"
+      ]
+    }
+  }
+}
