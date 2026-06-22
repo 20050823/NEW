@@ -1,0 +1,22 @@
+{
+  "name": "memory",
+  "version": "0.1.1",
+  "description": "File-based project memory workflow for AGENTS.md and CLAUDE.md.",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "\u8bb0\u5fc6",
+    "shortDescription": "Review context and update AGENTS.md / CLAUDE.md.",
+    "longDescription": "File-based memory for AGENTS.md and CLAUDE.md. Selecting Memory/\u8bb0\u5fc6 or saying @memory/@\u8bb0\u5fc6 starts a compact review workflow: first show proposed global and current-project memory content, then ask for 1 current project, 2 global, 3 both, or 4 do not write. Writes use ordinary file editing after confirmation.",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": "Use the file-based Memory/\u8bb0\u5fc6 workflow. If the user selects this plugin or says @memory/@\u8bb0\u5fc6, immediately review the visible conversation and workspace context. Reply compactly: recommend scope, show Global memory bullets, show Current project memory bullets, then ask the user to choose 1 current project, 2 global, 3 both, or 4 do not write. Use ordinary file editing tools only after confirmation. If direct editing is unavailable, provide target paths and copy-ready Markdown. Do not include MCP, tool availability diagnostics, or implementation details unless the user asks."
+  }
+}
