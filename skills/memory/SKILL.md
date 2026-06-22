@@ -10,7 +10,9 @@ Use this skill to turn the current visible conversation and workspace context in
 Memory is stored in ordinary guidance files, not in hidden platform memory:
 
 - Current project memory: workspace `AGENTS.md` and `CLAUDE.md`
-- Global memory: `C:\Users\30526\Documents\Codex\AGENTS.md`
+- 全局记忆: `C:\Users\30526\Documents\Codex\AGENTS.md`
+
+Chinese wording rule: always write `全局记忆`. Never write `全球记忆`.
 
 ## Default Trigger
 
@@ -80,7 +82,7 @@ After writing, keep the response compact:
 
 ## Scope Rules
 
-Global memory may include only durable cross-project collaboration preferences. Do not put project paths, temporary experiment notes, task-specific facts, or one-off failures into global memory.
+全局记忆 may include only durable cross-project collaboration preferences. Do not put project paths, temporary experiment notes, task-specific facts, or one-off failures into 全局记忆.
 
 Current project memory may include workspace paths, project facts, task-specific lessons, repository conventions, and context that should help future work in this project.
 
