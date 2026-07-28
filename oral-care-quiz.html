@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>鍙ｈ厰鎶ょ悊瀹夊叏鐭ヨ瘑娴嬮獙</title><style>
+:root{--ink:#173d36;--teal:#16836f;--pale:#eef7f4;--line:#d8e7e1}*{box-sizing:border-box}body{margin:0;background:#f5faf8;color:var(--ink);font-family:"Microsoft YaHei",Arial,sans-serif}.wrap{max-width:780px;margin:auto;padding:28px 16px 54px}header{background:linear-gradient(135deg,#e3f1ed,#fff);padding:26px;border-radius:20px;border:1px solid var(--line)}h1{font-size:27px;margin:0 0 8px}p{line-height:1.65;color:#526964}.badge{display:inline-block;background:#d9efe8;color:var(--teal);padding:5px 10px;border-radius:99px;font-size:13px;font-weight:bold}.q{background:#fff;border:1px solid var(--line);border-radius:16px;margin-top:16px;padding:20px}.q h2{font-size:17px;line-height:1.55;margin:0 0 13px}.opt{display:block;padding:12px;margin:8px 0;border:1px solid var(--line);border-radius:10px;line-height:1.4}.opt:has(input:checked){border-color:var(--teal);background:var(--pale)}input{accent-color:var(--teal);margin-right:8px}button{width:100%;border:0;border-radius:12px;background:var(--teal);color:#fff;font-size:18px;font-weight:bold;padding:15px;margin-top:22px}.result{display:none;background:#fff;border:2px solid var(--teal);padding:21px;border-radius:16px;margin-top:20px}.analysis{padding:15px 0;border-bottom:1px solid var(--line);line-height:1.65}.right{color:#087e62;font-weight:bold}.wrong{color:#c84d4d;font-weight:bold}.hint{font-size:13px;color:#70847d;margin-top:18px}
+</style></head><body><main class="wrap"><header><span class="badge">鎶ょ悊瀹ｈ 路 璇惧悗鑷祴</span><h1>鍙ｈ厰鎶ょ悊瀹夊叏鐭ヨ瘑娴嬮獙</h1><p>鍏?10 棰橈紝鍗曢€夈€傛彁浜ゅ悗鍙煡鐪嬪垎鏁般€佹纭瓟妗堜笌閫愰瑙ｆ瀽銆?/p></header><form id="quiz"></form><button id="submit">鎻愪氦骞舵煡鐪嬭В鏋?/button><section class="result" id="result"></section><p class="hint">鏈祴楠岀敤浜庡煿璁嚜娴嬶紱鍏蜂綋鎿嶄綔浠ュ尰鍢便€佸矖浣嶈祫璐ㄤ笌鏈満鏋勫埗搴︿负鍑嗐€?/p></main><script>
+const Q=[
+['瀹炴柦鍙ｈ厰鎶ょ悊鍓嶏紝棣栧厛搴旈噸鐐硅瘎浼颁粈涔堬紵',['鐥呮儏銆佹剰璇嗗拰閰嶅悎绋嬪害','鐥呮埧绐楀笜棰滆壊','鐢佃鑺傜洰'],0,'缁撳悎鍚炲捊銆佸挸鍡戒笌璇惛椋庨櫓锛屽喅瀹氫綋浣嶅拰鎶ょ悊鏂规硶銆?],
+['涓嬪垪鍝」灞炰簬鎶ょ悊鍓嶅繀椤昏瀵熺殑鍐呭锛?,['闉嬬爜','鍙ｅ攪銆侀粡鑶溿€佺墮榫堛€佽垖鑻斿強娲诲姩涔夐娇','鐞嗗彂鏃堕棿'],1,'鍙ｈ厰璇勪及搴斿叧娉ㄥ彛鍞囥€侀粡鑶溿€佺墮榫堛€佽垖鑻斻€佺墮榻挎澗鍔ㄥ強涔夐娇銆?],
+['浣跨敤妫夌悆鎿︽礂鍙ｈ厰鐨勬纭仛娉曟槸锛?,['涓€娆″す鍙栧涓鐞?,'鎿嶄綔鍓嶅悗娓呯偣锛屼竴娆″彧澶逛竴涓?,'妫夌悆瓒婃箍瓒婂ソ'],1,'閫愪釜澶瑰彇骞舵竻鐐癸紝鍙檷浣庢鐞冮仐鐣欏拰璇惛椋庨櫓銆?],
+['鏄忚糠鎴栧悶鍜介殰纰嶆偅鑰呮姢鐞嗘椂锛屾纭殑鏄紵',['妫夌悆鍏呭垎娴告箍','鍙嚜琛屾急鍙?,'鍙栦晶鍗т綅锛屾鐞冨共婀块€備腑'],2,'渚у崸浣嶆湁鍒╀簬寮曟祦锛涙鐞冧笉鍙繃婀匡紝涓旀绫绘偅鑰呬笉瀹滄急鍙ｃ€?],
+['鍙戠幇鎮ｈ€呮搷浣滀腑鎭跺績銆佹鍚愶紝搴斿浣曞鐞嗭紵',['缁х画瀹屾垚鎿嶄綔','鏆傚仠鎿嶄綔锛屽崗鍔╂繁鍛煎惛鏀炬澗骞朵繚鎶ゆ皵閬?,'鍔犲揩鎿︽礂'],1,'鍑虹幇鎭跺績鎴栨鍚愬簲绔嬪嵆鏆傚仠锛岄伩鍏嶅埡婵€鍔犻噸鎴栧彂鐢熻鍚搞€?],
+['鍙ｈ厰鎶ょ悊涓闃茶鍚哥殑鍏抽敭鎺柦鏄紵',['璁╂偅鑰呭钩鍗у苟婕卞彛','鎸夐闄╅€夋嫨浣撲綅锛屽繀瑕佹椂澶囧惛寮曞苟鎺у埗娑蹭綋閲?,'浣跨敤鏇村婕卞彛娑?],1,'璇勪及鍚炲捊鍜屾剰璇嗭紝鍚堢悊浣撲綅銆佹帶娑层€佸繀瑕佹椂鍚稿紩锛屾槸棰勯槻璇惛鐨勬牳蹇冦€?],
+['涓ラ噸姘旈亾寮傜墿姊楅樆鏈€闇€瑕佽鎯曠殑琛ㄧ幇鏄紵',['鑳芥竻鏅拌璇?,'鑳芥湁鏁堝挸鍡?,'鏃犳硶璇磋瘽鎴栨湁鏁堝挸鍡斤紝鍛煎惛鍙楅樆'],2,'鏃犳硶璇磋瘽銆佹棤鏁堝挸鍡藉拰鍛煎惛鍙楅樆鎻愮ず涓ラ噸姊楅樆锛屽簲绔嬪嵆鍛兼晳骞舵€ユ晳銆?],
+['澶勭悊鍙ｈ厰寮傜墿鏃讹紝閿欒鐨勬槸锛?,['浠呭彇鍑哄彲瑙佷笖鏄撳彇鐨勫紓鐗?,'鐩茬洰鎵嬫寚鎺㈡煡鍙ｈ厰娣遍儴','蹇呰鏃跺惎鍔ㄦ€ユ晳娴佺▼'],1,'涓嶈鐩茬洰鎵嬫寚娓呴櫎锛屼互鍏嶅皢寮傜墿鎺ㄥ叆鏇存繁澶勩€?],
+['濡備綍棰勯槻鍙ｈ厰榛忚啘鎹熶激锛?,['鍔ㄤ綔杞绘煍锛岄伩鍏嶅櫒姊板皷绔洿鎺ヨЕ纰伴粡鑶?,'鏆村姏鎾戝紑鐗欏叧','閫夌敤鍒烘縺鎬у緢寮虹殑娑蹭綋'],0,'鎿嶄綔杞绘煍锛屾纭娇鐢ㄥ紑鍙ｅ櫒骞堕€夋嫨閫傚疁娓╁害鐨勬急鍙ｆ恫銆?],
+['鍙ｈ厰鎶ょ悊涓庡惛鍏ユ€ц偤鐐庨闄╃殑鍏崇郴鏄紵',['鏃犲叧','鍙ｈ厰缁嗚弻鍙殢鍒嗘硨鐗╄鍚歌繘鍏ヤ笅鍛煎惛閬?,'鍙奖鍝嶅彛鑷?],1,'淇濇寔鍙ｈ厰娓呮磥鍙噺灏戠梾鍘熻礋鑽凤紝鏄鍚搁闄╃鐞嗙殑涓€閮ㄥ垎銆?]
+];
+const quiz=document.querySelector('#quiz');quiz.innerHTML=Q.map((q,i)=>`<section class="q"><h2>${i+1}. ${q[0]}</h2>${q[1].map((o,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}">${String.fromCharCode(65+j)}. ${o}</label>`).join('')}</section>`).join('');
+document.querySelector('#submit').onclick=e=>{e.preventDefault();let score=0,out='';Q.forEach((q,i)=>{let checked=document.querySelector(`input[name=q${i}]:checked`),v=checked?+checked.value:-1,ok=v===q[2];if(ok)score++;out+=`<div class="analysis"><strong>绗?${i+1} 棰橈細<span class="${ok?'right':'wrong'}">${ok?'鍥炵瓟姝ｇ‘':'闇€瑕佸涔?}</span></strong><br>姝ｇ‘绛旀锛?{String.fromCharCode(65+q[2])}. ${q[1][q[2]]}<br>${q[3]}</div>`});let r=document.querySelector('#result');r.style.display='block';r.innerHTML=`<h2>寰楀垎锛?{score*10} 鍒嗭紙${score}/10锛?/h2><p>${score===10?'鎺屾彙鑹ソ锛?:'璇风粨鍚堜互涓嬭В鏋愬涔犺杽寮辩幆鑺傘€?}</p>${out}`;r.scrollIntoView({behavior:'smooth'})};
+</script></body></html>
+
